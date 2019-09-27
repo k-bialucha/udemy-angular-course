@@ -2,15 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-servers',
-  template: `
-    <p>
-      <app-server></app-server>
-      <app-server></app-server>
-    </p>
-  `,
+  templateUrl: './servers.component.html',
   styleUrls: ['./servers.component.scss'],
 })
 export class ServersComponent implements OnInit {
+  allowNewSever: boolean = false;
+
   constructor() {}
 
   ngOnInit() {}
