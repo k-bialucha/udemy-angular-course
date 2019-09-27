@@ -1,3 +1,5 @@
+<label>Server Name: {{ serverName || 'no name' }}</label>
+<input type="text" class="form-control" (input)="onUpdateServerName($event)" />
 <button
   class="btn btn-primary"
   [disabled]="!allowNewSever"
