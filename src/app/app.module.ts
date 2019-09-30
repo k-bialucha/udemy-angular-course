@@ -9,6 +9,7 @@ import { ServersComponent } from './servers/servers.component';
 import { WarningAlertComponent } from './warning-alert/warning-alert.component';
 import { SuccessAlertComponent } from './success-alert/success-alert.component';
 import { UsernameInputComponent } from './username-input/username-input.component';
+import { AssignmentsComponent } from './assignments/assignments.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { UsernameInputComponent } from './username-input/username-input.componen
     WarningAlertComponent,
     SuccessAlertComponent,
     UsernameInputComponent,
+    AssignmentsComponent,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule],
   providers: [],
