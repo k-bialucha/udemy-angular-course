@@ -11,7 +11,9 @@ enum ServerStatus {
   styleUrls: ['./server.component.scss'],
 })
 export class ServerComponent {
-  serverId: number = 11;
+  serverId: string = Math.random()
+    .toString(16)
+    .substr(2, 5);
   serverStatus: ServerStatus = ServerStatus.ONLINE;
 
   constructor() {
