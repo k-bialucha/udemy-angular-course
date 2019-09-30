@@ -1,6 +1,10 @@
 <p>
   {{ 'Server' }} [ID: {{ serverId }}] is
-  <span [ngStyle]="{ color: getColor(), fontWeight: 600 }">{{
-    getServerStatus()
-  }}</span>
+  <span
+    [ngStyle]="{ color: getColor(), fontWeight: 600 }"
+    [ngClass]="{
+      'Server-statusText--online': checkIsServerOnline()
+    }"
+    >{{ getServerStatus() }}</span
+  >
 </p>

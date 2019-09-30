@@ -8,6 +8,7 @@ enum ServerStatus {
 @Component({
   selector: 'app-server',
   templateUrl: './server.component.html',
+  styleUrls: ['./server.component.scss'],
 })
 export class ServerComponent {
   serverId: number = 11;
@@ -20,6 +21,10 @@ export class ServerComponent {
 
   getServerStatus() {
     return this.serverStatus;
+  }
+
+  checkIsServerOnline() {
+    return this.serverStatus === ServerStatus.ONLINE;
   }
 
   getColor(): string {

@@ -1,0 +1,6 @@
+.Server-statusText--online {
+  &::after {
+    content: ' 🌍';
+    font-size: 1.3em;
+  }
+}
