@@ -1,1 +1,6 @@
-<p>{{ 'Server' }} [ID: {{ serverId }}] is {{ getServerStatus() }}</p>
+<p>
+  {{ 'Server' }} [ID: {{ serverId }}] is
+  <span [ngStyle]="{ color: getColor(), fontWeight: 600 }">{{
+    getServerStatus()
+  }}</span>
+</p>
