@@ -1,0 +1,14 @@
+$base-color: rgb(30, 140, 50);
+
+.SuccessAlert--container {
+  border: 2px dashed $base-color;
+  padding: 5px 30px;
+  margin: 10px 5px;
+
+  .SuccessAlert--title {
+    font-weight: 800;
+    color: darken($base-color, 10);
+
+    margin: 5px 0;
+  }
+}
