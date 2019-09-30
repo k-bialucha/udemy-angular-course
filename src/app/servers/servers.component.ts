@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 
 interface ComponentState {
   allowNewServer: boolean;
+  serverCreated: boolean;
   serverCreationStatus: string;
   serverName: string;
 }
 
 const initialState: ComponentState = {
   allowNewServer: false,
+  serverCreated: false,
   serverCreationStatus: 'waiting for server to be added...',
   serverName: 'my server',
 };
@@ -19,6 +21,7 @@ const initialState: ComponentState = {
 })
 export class ServersComponent implements OnInit {
   allowNewSever: boolean = initialState.allowNewServer;
+  serverCreated: boolean = initialState.serverCreated;
   serverCreationStatus: string = initialState.serverCreationStatus;
   serverName: string = initialState.serverName;
 
@@ -33,9 +36,11 @@ export class ServersComponent implements OnInit {
   onCreateServer() {
     this.serverCreationStatus = `Server >>${this.serverName}<< was created!`;
     this.allowNewSever = false;
+    this.serverCreated = true;
 
     setTimeout(() => {
       this.allowNewSever = true;
+      this.serverCreated = initialState.serverCreated;
       this.serverCreationStatus = initialState.serverCreationStatus;
       this.serverName = initialState.serverName;
     }, 2000);

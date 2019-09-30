@@ -16,4 +16,9 @@
     </button>
   </span>
 </div>
-<p>Selected username will be: {{ username || '...' }}</p>
+<p *ngIf="username && username !== 'admin'">
+  Selected username will be: {{ username || '...' }}
+</p>
+<p *ngIf="username === 'admin'">
+  This username is reserved and cannot be used.
+</p>
