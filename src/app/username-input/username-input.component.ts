@@ -10,4 +10,9 @@ export class UsernameInputComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  onSaveUsername() {
+    alert(`username "${this.username}" saved!`);
+    this.username = '';
+  }
 }

@@ -6,7 +6,14 @@
     placeholder="type your username..."
   />
   <span class="input-group-btn">
-    <button class="btn btn-primary" type="button">save</button>
+    <button
+      class="btn btn-primary"
+      type="button"
+      [disabled]="!username"
+      (click)="onSaveUsername()"
+    >
+      save
+    </button>
   </span>
 </div>
-<p>Selected username will be: {{ username }}</p>
+<p>Selected username will be: {{ username || '...' }}</p>
