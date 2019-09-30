@@ -7,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConditionalContentExampleComponent implements OnInit {
   detailsVisible: boolean = false;
+  clicks: string[] = [];
 
   constructor() {}
 
   ngOnInit() {}
+
+  handleDetailsButtonClick() {
+    const timestamp = new Date().toISOString();
+    this.clicks = [...this.clicks, timestamp];
+
+    this.toggleDetailsVisibility();
+  }
 
   toggleDetailsVisibility() {
     this.detailsVisible = !this.detailsVisible;

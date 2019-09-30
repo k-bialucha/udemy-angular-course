@@ -1,8 +1,20 @@
 <button
   class="btn btn-default"
   type="button"
-  (click)="toggleDetailsVisibility()"
+  (click)="handleDetailsButtonClick()"
 >
   Display Details
 </button>
 <p *ngIf="detailsVisible">[Secret details]</p>
+<div *ngIf="clicks.length">
+  <h4>Clicks history</h4>
+  <ol>
+    <li *ngFor="let click of clicks; let idx = index">
+      <span
+        [ngStyle]="{ backgroundColor: idx >= 4 && 'blue' }"
+        [ngClass]="{ 'ConditionalContent-listItem--highlighted': idx >= 4 }"
+        >{{ click }}
+      </span>
+    </li>
+  </ol>
+</div>
