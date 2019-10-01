@@ -41,7 +41,6 @@ export class CockpitComponent implements OnInit {
   }
 
   onAddBlueprint(serverNameInput: HTMLInputElement) {
-    console.warn('BLUEPRINT', this.serverContentInput);
     const newServerName = serverNameInput.value;
     const newServerContent = this.serverContentInput.nativeElement.value;
 
