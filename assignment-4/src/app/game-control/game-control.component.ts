@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-const EMIT_INTERVAL = 300;
+const EMIT_INTERVAL = 1000;
 
 @Component({
   selector: 'app-game-control',

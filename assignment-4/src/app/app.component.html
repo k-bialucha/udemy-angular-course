@@ -1,12 +1,14 @@
 <div class="container">
-  <app-game-control (integerEmitted)="onServerAdded($event)"></app-game-control>
+  <app-game-control
+    (newNumberEmitted)="onNumberEmitted($event)"
+  ></app-game-control>
   <hr />
   <div class="row">
-    <div class="col-xs-12">
-      <app-even></app-even>
+    <div class="col-xs-6">
+      <app-even *ngFor="let even of evenNumbers"></app-even>
     </div>
-    <div class="col-xs-12">
-      <app-odd></app-odd>
+    <div class="col-xs-6">
+      <app-odd *ngFor="let odd of oddNumbers"></app-odd>
     </div>
   </div>
 </div>
