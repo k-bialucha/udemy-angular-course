@@ -6,16 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  oddNumbers = [];
-  evenNumbers = [];
+  oddNumbers: number[] = [];
+  evenNumbers: number[] = [];
 
   onNumberEmitted(number: number) {
     const isEven = number % 2 === 0;
 
     if (isEven) {
-      this.evenNumbers.push(number);
+      this.evenNumbers.unshift(number);
     } else {
-      this.oddNumbers.push(number);
+      this.oddNumbers.unshift(number);
     }
   }
 }

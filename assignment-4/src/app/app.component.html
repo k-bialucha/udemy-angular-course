@@ -5,10 +5,10 @@
   <hr />
   <div class="row">
     <div class="col-xs-6">
-      <app-even *ngFor="let even of evenNumbers"></app-even>
+      <app-even *ngFor="let number of evenNumbers" [number]="number"></app-even>
     </div>
     <div class="col-xs-6">
-      <app-odd *ngFor="let odd of oddNumbers"></app-odd>
+      <app-odd *ngFor="let number of oddNumbers" [number]="number"></app-odd>
     </div>
   </div>
 </div>
