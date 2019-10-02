@@ -5,6 +5,19 @@
   ></app-cockpit>
   <hr />
   <div class="row">
+    <div class="col-md-6">
+      <button
+        class="btn btn-primary btn-small"
+        (click)="changeFirstElementName()"
+      >
+        Change first
+      </button>
+      <button class="btn btn-danger btn-small" (click)="destroyFirstElement()">
+        Destroy first
+      </button>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-xs-12">
       <app-server-element
         *ngFor="let element of serverElements"

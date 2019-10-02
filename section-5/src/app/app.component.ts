@@ -28,4 +28,13 @@ export class AppComponent {
       content: blueprintData.serverContent,
     });
   }
+
+  changeFirstElementName() {
+    this.serverElements[0].name = 'modified...';
+  }
+
+  destroyFirstElement() {
+    const [firstServerElement, ...restServerElements] = this.serverElements;
+    this.serverElements = restServerElements;
+  }
 }
