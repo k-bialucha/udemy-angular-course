@@ -10,6 +10,8 @@ import {
   AfterViewInit,
   AfterViewChecked,
   OnDestroy,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 
 @Component({
@@ -33,6 +35,7 @@ export class ServerElementComponent
   //   name: string;
   //   content: string;
   // };
+  @ViewChild('headingElement', { static: true }) heading: ElementRef;
 
   constructor() {
     styledLog('constructor called', 'blue');
@@ -45,6 +48,9 @@ export class ServerElementComponent
 
   ngOnInit() {
     styledLog('ngOnInit called', 'green');
+    console.log(
+      `heading content: >>${this.heading.nativeElement.textContent}<<`
+    );
   }
 
   ngDoCheck() {
@@ -57,16 +63,24 @@ export class ServerElementComponent
 
   ngAfterContentChecked() {
     styledLog('ngAfterContentInit called', 'teal');
+    console.log(
+      `heading content: >>${this.heading.nativeElement.textContent}<<`
+    );
   }
 
   ngAfterViewInit() {
     styledLog('ngAfterViewInit called', 'orange');
+    console.log(
+      `heading content: >>${this.heading.nativeElement.textContent}<<`
+    );
   }
+
   ngAfterViewChecked() {
     styledLog('ngAfterViewChecked called', 'pink');
   }
 
   ngOnDestroy() {
+    console.warn('test:', this.heading);
     styledLog('ngOnDestroy called', 'red');
   }
 }
