@@ -23,7 +23,7 @@
         *ngFor="let element of serverElements"
         [name]="element.name"
       >
-        <p>
+        <p #contentChildParagraph>
           <strong *ngIf="element.type === 'server'" style="color: red">{{
             element.content
           }}</strong>

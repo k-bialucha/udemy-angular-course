@@ -12,6 +12,7 @@ import {
   OnDestroy,
   ViewChild,
   ElementRef,
+  ContentChild,
 } from '@angular/core';
 
 @Component({
@@ -36,6 +37,8 @@ export class ServerElementComponent
   //   content: string;
   // };
   @ViewChild('headingElement', { static: true }) heading: ElementRef;
+  @ContentChild('contentChildParagraph', { static: true })
+  childParagraph: ElementRef;
 
   constructor() {
     styledLog('constructor called', 'blue');
@@ -51,6 +54,9 @@ export class ServerElementComponent
     console.log(
       `heading content: >>${this.heading.nativeElement.textContent}<<`
     );
+    console.log(
+      `child paragraph content: >>${this.childParagraph.nativeElement.textContent}<<`
+    );
   }
 
   ngDoCheck() {
@@ -59,6 +65,9 @@ export class ServerElementComponent
 
   ngAfterContentInit() {
     styledLog('ngAfterContentInit called', 'purple');
+    console.log(
+      `child paragraph content: >>${this.childParagraph.nativeElement.textContent}<<`
+    );
   }
 
   ngAfterContentChecked() {
