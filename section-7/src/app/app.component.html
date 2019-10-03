@@ -32,6 +32,13 @@
       <p appBetterHighlight defaultColor="#eee" highlightColor="#7b7">
         A better test paragraph...
       </p>
+      <hr />
+      <h4>Switch example</h4>
+      <div [ngSwitch]="switchValue">
+        <p *ngSwitchCase="1">Switch value is 1</p>
+        <p *ngSwitchCase="10">Switch value is 10</p>
+        <p *ngSwitchDefault>Switch value is something else</p>
+      </div>
     </div>
   </div>
 </div>
