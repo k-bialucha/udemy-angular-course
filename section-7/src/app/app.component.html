@@ -11,11 +11,13 @@
             Number: {{ number }}
           </li>
         </div>
-        <div *ngIf="!onlyOdd">
-          <li class="list-group-item" *ngFor="let number of evenNumbers">
-            Number: {{ number }}
-          </li>
-        </div>
+        <ng-template [ngIf]="!onlyOdd">
+          <div>
+            <li class="list-group-item" *ngFor="let number of evenNumbers">
+              Number: {{ number }}
+            </li>
+          </div>
+        </ng-template>
       </ul>
       <ng-template [ngIf]="onlyOdd">
         <p>Only odd</p>
