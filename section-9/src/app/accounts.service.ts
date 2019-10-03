@@ -14,11 +14,11 @@ export class AccountsService {
     },
   ];
 
-  addAccount(newAccount: { name: string; status: string }) {
-    this.accounts.push(newAccount);
+  addAccount(name: string, status: string) {
+    this.accounts.push({ name, status });
   }
 
-  updateStatus(updateInfo: { id: number; newStatus: string }) {
-    this.accounts[updateInfo.id].status = updateInfo.newStatus;
+  updateStatus(id: number, status: string) {
+    this.accounts[id].status = status;
   }
 }
