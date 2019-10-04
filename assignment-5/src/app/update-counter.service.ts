@@ -1,5 +1,6 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
+@Injectable({ providedIn: 'root' })
 export class UpdateCounterService {
   private _activeToInactiveCount: number = 0;
   private _inactiveToActiveCount: number = 0;

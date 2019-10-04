@@ -6,12 +6,10 @@ import { AppComponent } from './app.component';
 import { ActiveUsersComponent } from './active-users/active-users.component';
 import { InactiveUsersComponent } from './inactive-users/inactive-users.component';
 
-import { UpdateCounterService } from './update-counter.service';
-
 @NgModule({
   declarations: [AppComponent, ActiveUsersComponent, InactiveUsersComponent],
   imports: [BrowserModule, FormsModule],
-  providers: [UpdateCounterService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
