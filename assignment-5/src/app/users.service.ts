@@ -1,7 +1,9 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+import { UpdateCounterService } from './update-counter.service';
 
 type UserList = string[];
 
+@Injectable()
 export class UsersService {
   activeUsers: UserList = ['Max', 'Anna'];
   inactiveUsers: UserList = ['Chris', 'Manu'];
@@ -10,7 +12,7 @@ export class UsersService {
 
   public subscribeToUpdates: (handler: () => any) => void;
 
-  constructor() {
+  constructor(private counterService: UpdateCounterService) {
     this.subscribeToUpdates = handler => {
       this.usersUpdateEmitter.subscribe(handler);
     };
@@ -21,6 +23,7 @@ export class UsersService {
     this.activeUsers.splice(id, 1);
 
     this.notifyAfterUpdate();
+    this.counterService.incrementActiveToInactiveCount();
   }
 
   setInactiveToActive(id: number) {
@@ -28,6 +31,7 @@ export class UsersService {
     this.inactiveUsers.splice(id, 1);
 
     this.notifyAfterUpdate();
+    this.counterService.incrementInactiveToActiveCount();
   }
 
   private notifyAfterUpdate() {
