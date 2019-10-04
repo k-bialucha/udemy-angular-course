@@ -10,20 +10,12 @@ import { UpdateCounterService } from './update-counter.service';
   providers: [UsersService],
 })
 export class AppComponent implements OnInit {
-  activeUsers;
-  inactiveUsers;
   activeToInactiveCount;
   inactiveToActiveCount;
 
-  constructor(
-    private usersService: UsersService,
-    private countersService: UpdateCounterService
-  ) {}
+  constructor(private countersService: UpdateCounterService) {}
 
   ngOnInit(): void {
-    this.activeUsers = this.usersService.activeUsers;
-    this.inactiveUsers = this.usersService.inactiveUsers;
-
     this.updateCounters();
     this.countersService.countersUpdated(() => this.updateCounters());
   }
