@@ -2,6 +2,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 
 import { LoggingService } from './logging.service';
 
+type VoidFunctionType = (handler: (status: string) => void) => void;
+
 @Injectable()
 export class AccountsService {
   accounts = [
@@ -18,17 +20,26 @@ export class AccountsService {
       status: 'unknown',
     },
   ];
-  statusUpdatedEmitter = new EventEmitter<string>();
 
-  constructor(private loggingService: LoggingService) {}
+  private statusUpdatedEmitter = new EventEmitter<string>();
+  public subscribeToStatusUpdates: VoidFunctionType;
+
+  constructor(private loggingService: LoggingService) {
+    this.subscribeToStatusUpdates = handler => {
+      this.statusUpdatedEmitter.subscribe(handler);
+    };
+  }
 
   addAccount(name: string, status: string) {
     this.accounts.push({ name, status });
+
     this.loggingService.logStatusChange(status);
   }
 
   updateStatus(id: number, status: string) {
     this.accounts[id].status = status;
+    this.statusUpdatedEmitter.emit(status);
+
     this.loggingService.logStatusChange(status);
   }
 }

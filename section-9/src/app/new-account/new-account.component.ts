@@ -13,7 +13,7 @@ export class NewAccountComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.accountsService.statusUpdatedEmitter.subscribe((status: string) => {
+    this.accountsService.subscribeToStatusUpdates((status: string) => {
       alert('New status: ' + status);
     });
   }
