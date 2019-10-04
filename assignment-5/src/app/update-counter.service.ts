@@ -1,26 +1,33 @@
 import { EventEmitter } from '@angular/core';
 
 export class UpdateCounterService {
-  inactiveToActiveCount: number = 0;
-  activeToInactiveCount: number = 0;
+  private _activeToInactiveCount: number = 0;
+  private _inactiveToActiveCount: number = 0;
+
+  public get activeToInactiveCount(): number {
+    return this._activeToInactiveCount;
+  }
+  public get inactiveToActiveCount(): number {
+    return this._inactiveToActiveCount;
+  }
 
   private countersUpdatedEmitter: EventEmitter<void> = new EventEmitter();
   public countersUpdated;
 
   constructor() {
-    this.countersUpdated = handler => {
+    this.countersUpdated = (handler: () => any) => {
       this.countersUpdatedEmitter.subscribe(handler);
     };
   }
 
   incrementInactiveToActiveCount() {
-    ++this.inactiveToActiveCount;
+    ++this._inactiveToActiveCount;
 
     this.countersUpdatedEmitter.emit();
   }
 
   incrementActiveToInactiveCount() {
-    ++this.activeToInactiveCount;
+    ++this._activeToInactiveCount;
 
     this.countersUpdatedEmitter.emit();
   }
