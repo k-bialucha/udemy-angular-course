@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UsersService } from './users.service';
+import { UpdateCounterService } from './update-counter.service';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +12,24 @@ import { UsersService } from './users.service';
 export class AppComponent implements OnInit {
   activeUsers;
   inactiveUsers;
+  activeToInactiveCount;
+  inactiveToActiveCount;
 
-  constructor(private usersService: UsersService) {
-    this.activeUsers = usersService.activeUsers;
-    this.inactiveUsers = usersService.inactiveUsers;
-  }
+  constructor(
+    private usersService: UsersService,
+    private countersService: UpdateCounterService
+  ) {}
 
   ngOnInit(): void {
-    this.usersService.subscribeToUpdates(() => {
-      this.activeUsers = this.usersService.activeUsers;
-      this.inactiveUsers = this.usersService.inactiveUsers;
-    });
+    this.activeUsers = this.usersService.activeUsers;
+    this.inactiveUsers = this.usersService.inactiveUsers;
+
+    this.updateCounters();
+    this.countersService.countersUpdated(() => this.updateCounters());
+  }
+
+  private updateCounters() {
+    this.activeToInactiveCount = this.countersService.activeToInactiveCount;
+    this.inactiveToActiveCount = this.countersService.inactiveToActiveCount;
   }
 }

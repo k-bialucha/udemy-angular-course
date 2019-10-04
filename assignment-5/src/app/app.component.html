@@ -1,8 +1,18 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-md-8 col-md-offset-2">
+    <div class="col-sm-6 col-lg-4 col-lg-offset-2">
       <app-active-users [users]="activeUsers"></app-active-users>
+      <p>
+        Moved to inactive count
+        <span class="badge">{{ activeToInactiveCount }}</span>
+      </p>
+    </div>
+    <div class="col-sm-6 col-lg-4">
       <app-inactive-users [users]="inactiveUsers"></app-inactive-users>
+      <p>
+        Moved to active count
+        <span class="badge">{{ inactiveToActiveCount }}</span>
+      </p>
     </div>
     <!--
       Optimize this app by adding a UsersService which manages the active and inactive users.
