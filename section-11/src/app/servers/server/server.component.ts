@@ -38,7 +38,7 @@ export class ServerComponent implements OnInit {
         // only relative path"
         'edit',
       ],
-      { relativeTo: this.route }
+      { relativeTo: this.route, queryParamsHandling: 'preserve' }
     );
   }
 }
