@@ -8,16 +8,17 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private observableSubscription: Subscription;
+  causeError = false;
+
   constructor() {}
 
   ngOnInit() {
-    const displayError = false;
     const customObservable = Observable.create(observer => {
       let count = 0;
 
       setInterval(() => {
-        if (displayError && count > 3)
-          observer.error(new Error('Bad error. Count exceeded 3!'));
+        if (this.causeError && count > 3)
+          observer.error(new Error('Bad error. Count exceeded 5!'));
 
         if (count >= 5) observer.complete();
 
@@ -41,5 +42,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     console.warn('will unsubscribe:', this.observableSubscription);
     this.observableSubscription.unsubscribe();
+  }
+
+  enableCauseError() {
+    this.causeError = true;
   }
 }
