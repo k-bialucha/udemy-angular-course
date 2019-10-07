@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +20,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
       setInterval(() => {
         if (this.causeError && count > 3)
-          observer.error(new Error('Bad error. Count exceeded 5!'));
+          observer.error(
+            new Error(
+              `Bad error. Count exceeded 3! (value >${count}< received)`
+            )
+          );
 
         if (count >= 5) observer.complete();
 
@@ -29,6 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
 
     const customObservableWithPipe = customObservable.pipe(
+      filter((count: number) => !(count % 2 === 0)),
       map((count: number) => `round: ${count + 1}`)
     );
 
