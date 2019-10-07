@@ -1,22 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+
+import { CanComponentDeactivate } from './can-deactivate-guard.service';
 
 @Component({
   selector: 'app-edit-server',
   templateUrl: './edit-server.component.html',
   styleUrls: ['./edit-server.component.css'],
 })
-export class EditServerComponent implements OnInit {
+export class EditServerComponent implements OnInit, CanComponentDeactivate {
   server: { id: number; name: string; status: string };
+
   serverName = '';
   serverStatus = '';
-  allowEdit = false;
+
+  allowEdit: boolean = false;
+  changesSaved: boolean = false;
 
   constructor(
     private serversService: ServersService,
-    private currentRoute: ActivatedRoute
+    private currentRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -34,5 +40,27 @@ export class EditServerComponent implements OnInit {
       name: this.serverName,
       status: this.serverStatus,
     });
+    this.changesSaved = true;
+    this.router.navigate(['../'], { relativeTo: this.currentRoute });
+  }
+
+  canDeactivate(): boolean {
+    if (!this.allowEdit) return true;
+
+    const somethingChanged =
+      this.serverName !== this.server.name ||
+      this.serverStatus !== this.server.status;
+
+    if (somethingChanged && !this.changesSaved) return this.askForLeave();
+
+    return true;
+  }
+
+  askForLeave(): boolean {
+    const userConfirmed = confirm(
+      'Changes were made to the server. Do you want to leave??'
+    );
+
+    return userConfirmed;
   }
 }
