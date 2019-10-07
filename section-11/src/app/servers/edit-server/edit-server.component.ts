@@ -26,7 +26,9 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
   ) {}
 
   ngOnInit() {
-    this.server = this.serversService.getServer(1);
+    const serverId = +this.currentRoute.snapshot.params.id;
+    this.server = this.serversService.getServer(serverId);
+
     this.serverName = this.server.name;
     this.serverStatus = this.server.status;
 
