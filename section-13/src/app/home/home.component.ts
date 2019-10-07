@@ -11,13 +11,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit() {
+    const displayError = false;
     const customObservable = Observable.create(observer => {
       let count = 0;
 
       setInterval(() => {
-        observer.next(++count);
-        if (count > 3)
+        if (displayError && count > 3)
           observer.error(new Error('Bad error. Count exceeded 3!'));
+
+        if (count >= 5) observer.complete();
+
+        observer.next(++count);
       }, 1000);
     });
 
@@ -27,6 +31,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       },
       error => {
         alert(`Observable error: \n${error.message}`);
+      },
+      () => {
+        console.warn('observable completed!');
       }
     );
   }
