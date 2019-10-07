@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +10,8 @@ export class AuthService {
     return this._loggedIn;
   }
 
+  loginStateChanged: EventEmitter<void> = new EventEmitter();
+
   isAuthenticated(): Promise<boolean> {
     return new Promise(resolve => {
       setTimeout(() => resolve(this.loggedIn), 800);
@@ -18,9 +20,11 @@ export class AuthService {
 
   login() {
     this._loggedIn = true;
+    this.loginStateChanged.emit();
   }
 
   logout() {
     this._loggedIn = false;
+    this.loginStateChanged.emit();
   }
 }
