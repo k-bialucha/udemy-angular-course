@@ -10,6 +10,7 @@ export class AppComponent implements DoCheck {
   @ViewChild('form', { static: true }) form: NgForm;
   defaultQuestion: string = 'pet';
   questionAnswer: string = 'type sth...';
+  genders: string[] = ['other', 'female', 'male'];
 
   suggestUserName() {
     const suggestedName = 'Superuser';
