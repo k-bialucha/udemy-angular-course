@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 export class AppComponent implements DoCheck {
   @ViewChild('form', { static: true }) form: NgForm;
   defaultQuestion: string = 'pet';
+  questionAnswer: string = 'type sth...';
 
   suggestUserName() {
     const suggestedName = 'Superuser';
