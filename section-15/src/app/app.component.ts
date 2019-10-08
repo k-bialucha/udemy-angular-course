@@ -14,6 +14,16 @@ export class AppComponent implements DoCheck {
 
   suggestUserName() {
     const suggestedName = 'Superuser';
+    // this.form.setValue({
+    //   userData: {
+    //     username: suggestedName,
+    //     email: '...'
+    //   },
+    //  requires typing every form value
+    // });
+    this.form.form.patchValue({
+      userData: { username: suggestedName },
+    });
   }
 
   onSubmit() {
