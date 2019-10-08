@@ -57,6 +57,9 @@
             [(ngModel)]="questionAnswer"
           ></textarea>
         </div>
+        <p>
+          Your answer is: <strong>{{ questionAnswer }}</strong>
+        </p>
         <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
           Submit
         </button>
