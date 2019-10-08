@@ -19,21 +19,36 @@
           <input
             type="text"
             class="form-control"
-            placeholder="Username"
+            name="email"
+            placeholder="email"
+            ngModel
             required
             email
           />
         </div>
         <div class="form-group">
+          <select class="form-control" name="subscriptionType" ngModel>
+            <option value="0">basic</option>
+            <option value="1">advanced</option>
+            <option value="2">pr0</option>
+          </select>
+        </div>
+        <div class="form-group">
           <input
             type="password"
+            name="password"
             class="form-control"
-            placeholder="Password"
+            placeholder="password"
+            ngModel
             required
           />
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            (click)="handleSubmit()"
+          >
             Log in
           </button>
         </div>

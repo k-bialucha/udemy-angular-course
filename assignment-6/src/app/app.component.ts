@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -11,5 +11,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     console.warn('INIT:', this.loginForm);
+    console.log(this.loginForm.value);
+  }
+
+  handleSubmit() {
+    console.log('Submit form:', this.loginForm.value);
   }
 }
