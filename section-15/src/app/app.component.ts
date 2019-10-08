@@ -10,4 +10,8 @@ export class AppComponent {
   suggestUserName() {
     const suggestedName = 'Superuser';
   }
+
+  onSubmit(form: NgForm) {
+    console.warn('submit', form);
+  }
 }
