@@ -60,6 +60,14 @@
             Log in
           </button>
         </div>
+        <div>
+          State:
+          <strong>
+            {{ !loginForm.touched ? 'not touched' : '' }}
+            {{ loginForm.touched && loginForm.valid ? 'valid' : '' }}
+            {{ loginForm.invalid && loginForm.touched ? 'invalid' : '' }}
+          </strong>
+        </div>
       </form>
     </div>
   </div>
