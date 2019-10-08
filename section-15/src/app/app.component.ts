@@ -46,6 +46,7 @@ export class AppComponent implements DoCheck {
     };
 
     this.user = userData;
+    this.form.reset();
   }
 
   ngDoCheck(): void {
