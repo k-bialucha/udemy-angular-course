@@ -12,6 +12,14 @@ export class AppComponent implements DoCheck {
   questionAnswer: string = 'type sth...';
   genders: string[] = ['other', 'female', 'male'];
 
+  user: {
+    username: string;
+    email: string;
+    secretQuestion: string;
+    questionAnswer: string;
+    gender: string;
+  } = null;
+
   suggestUserName() {
     const suggestedName = 'Superuser';
     // this.form.setValue({
@@ -28,6 +36,16 @@ export class AppComponent implements DoCheck {
 
   onSubmit() {
     console.warn('onSubmit - form object', this.form);
+
+    const userData = {
+      username: this.form.value.userData.username,
+      email: this.form.value.userData.email,
+      secretQuestion: this.form.value.secret,
+      questionAnswer: this.form.value.questionAnswer,
+      gender: this.form.value.gender,
+    };
+
+    this.user = userData;
   }
 
   ngDoCheck(): void {

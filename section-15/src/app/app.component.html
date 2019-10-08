@@ -76,4 +76,23 @@
       </form>
     </div>
   </div>
+  <hr *ngIf="user" />
+  <div class="row" *ngIf="user">
+    <div class="col-xs-12">
+      <h3>Entered data:</h3>
+      <p>
+        Username: <strong>{{ user.username }}</strong>
+      </p>
+      <p>
+        Email: <strong>{{ user.email }}</strong>
+      </p>
+      <p>
+        Gender: <strong>{{ user.gender }}</strong>
+      </p>
+      <p>
+        Question answer [{{ user.secretQuestion }}]:
+        <strong>{{ user.questionAnswer }}</strong>
+      </p>
+    </div>
+  </div>
 </div>
