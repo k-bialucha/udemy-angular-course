@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, DoCheck } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements DoCheck {
   @ViewChild('form', { static: true }) form: NgForm;
 
   suggestUserName() {
@@ -15,5 +15,13 @@ export class AppComponent {
 
   onSubmit() {
     console.warn('onSubmit - form object', this.form);
+  }
+
+  ngDoCheck(): void {
+    console.log(
+      `[ngDoCheck] form is %c${this.form.invalid ? 'invalid' : 'valid'}`,
+      `color: ${this.form.invalid ? 'red' : 'green'}; font-weight: 600;`,
+      this.form.value
+    );
   }
 }
