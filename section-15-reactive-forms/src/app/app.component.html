@@ -2,41 +2,45 @@
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            class="form-control"
-            formControlName="username"
-          />
-          <span
-            *ngIf="
-              !signupForm.get('username').valid &&
-              signupForm.get('username').touched
-            "
-            class="help-block"
-          >
-            this field is required
-          </span>
+        <div formGroupName="user">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              formControlName="username"
+            />
+            <span
+              *ngIf="
+                !signupForm.get('user.username').valid &&
+                signupForm.get('user.username').touched
+              "
+              class="help-block"
+            >
+              this field is required
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="email">email</label>
+            <input
+              type="text"
+              id="email"
+              class="form-control"
+              formControlName="email"
+            />
+            <span
+              *ngIf="
+                !signupForm.get('user.email').valid &&
+                signupForm.get('user.email').touched
+              "
+              class="help-block"
+            >
+              this field is required
+            </span>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="email">email</label>
-          <input
-            type="text"
-            id="email"
-            class="form-control"
-            formControlName="email"
-          />
-          <span
-            *ngIf="
-              !signupForm.get('email').valid && signupForm.get('email').touched
-            "
-            class="help-block"
-          >
-            this field is required
-          </span>
-        </div>
+
         <div class="radio" *ngFor="let gender of genders">
           <label>
             <input type="radio" [value]="gender" formControlName="gender" />
