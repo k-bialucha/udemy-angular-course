@@ -16,7 +16,7 @@
       -->
       <form [formGroup]="form">
         <div class="form-group">
-          <label for="projectName">Project name</label>
+          <label for="projectName">Project Name</label>
           <input
             type="text"
             name="projectName"
@@ -25,13 +25,25 @@
           />
         </div>
         <div class="form-group">
-          <label for="projectName">Email</label>
+          <label for="email">Email</label>
           <input
             type="text"
             name="email"
             class="form-control"
             formControlName="email"
           />
+        </div>
+        <div class="form-group">
+          <label for="projectStatus">Project Status</label>
+          <select
+            name="projectStatus"
+            class="form-control"
+            formControlName="projectStatus"
+          >
+            <option *ngFor="let option of statuses" value="{{ option }}">
+              {{ option }}
+            </option>
+          </select>
         </div>
       </form>
     </div>
