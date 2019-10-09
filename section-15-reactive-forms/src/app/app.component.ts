@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
 
     if (this.signupForm.get('user.email').errors['required'])
       return 'this field is required';
+
     if (this.signupForm.get('user.email').errors['emailIsForbidden'])
       return `"${this.signupForm.get('user.email').value}" is forbidden!`;
 
