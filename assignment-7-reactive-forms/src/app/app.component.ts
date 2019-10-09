@@ -12,7 +12,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      projectName: new FormControl('', Validators.required),
+      projectName: new FormControl('', [
+        Validators.required,
+        this.isProjectNameValid,
+      ]),
       email: new FormControl('', [Validators.required, Validators.email]),
       projectStatus: new FormControl(this.statuses[1]),
     });
@@ -24,5 +27,13 @@ export class AppComponent implements OnInit {
 
   onSubmit() {
     console.warn('onSubmit - form value is:', this.form.value);
+  }
+
+  isProjectNameValid(control: FormControl) {
+    const nameLowerCase = (<string>control.value).toLowerCase();
+
+    if (nameLowerCase === 'test') return { projectNameForbidden: true };
+
+    return null;
   }
 }
