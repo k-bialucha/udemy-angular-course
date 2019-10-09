@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  genders = ['male', 'female'];
+  genders = ['male', 'female', 'other'];
   signupForm: FormGroup;
   forbiddenUsernames = ['Kamil', 'admin', 'superuser'];
 
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
         ),
       }),
       gender: new FormControl('male'),
-      hobbies: new FormArray([]),
+      hobbies: new FormArray([new FormControl(null)]),
     });
 
     // form changes subscription
@@ -53,6 +53,21 @@ export class AppComponent implements OnInit {
     });
     this.signupForm.statusChanges.subscribe(status => {
       console.log('signup form status change:', status);
+    });
+
+    // value manipulation examples
+    this.signupForm.setValue({
+      user: {
+        username: 'Kamil',
+        email: 'forbidden@email.com',
+      },
+      gender: 'other',
+      hobbies: ['React'],
+    });
+    this.signupForm.patchValue({
+      user: {
+        username: 'superuser',
+      },
     });
   }
 
