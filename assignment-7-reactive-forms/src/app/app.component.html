@@ -14,6 +14,15 @@
 
           Upon submitting the form, simply print the value to the console
       -->
+      <form [formGroup]="form">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="projectName"
+          />
+        </div>
+      </form>
     </div>
   </div>
 </div>
