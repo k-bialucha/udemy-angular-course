@@ -13,7 +13,7 @@
            Upon submitting the form, you should simply print the Value of the Form to the Console.
            Optionally, display it in your template.
       -->
-      <form #loginForm="ngForm">
+      <form #loginForm="ngForm" (ngSubmit)="handleSubmit()">
         <h2 class="text-center">Log in</h2>
         <div class="form-group">
           <input
@@ -52,11 +52,7 @@
           </p>
         </div>
         <div class="form-group">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            (click)="handleSubmit()"
-          >
+          <button type="submit" class="btn btn-primary">
             Log in
           </button>
         </div>
