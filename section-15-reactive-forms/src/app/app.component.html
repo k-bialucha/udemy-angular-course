@@ -39,14 +39,8 @@
               class="form-control"
               formControlName="email"
             />
-            <span
-              *ngIf="
-                !signupForm.get('user.email').valid &&
-                signupForm.get('user.email').touched
-              "
-              class="help-block"
-            >
-              this field is required
+            <span *ngIf="emailFieldValidationMessage" class="help-block">
+              {{ emailFieldValidationMessage }}
             </span>
           </div>
         </div>

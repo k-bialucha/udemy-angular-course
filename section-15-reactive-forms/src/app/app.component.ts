@@ -16,6 +16,19 @@ export class AppComponent implements OnInit {
     return (this.signupForm.get('hobbies') as FormArray).controls;
   }
 
+  get emailFieldValidationMessage(): string {
+    const emailField = this.signupForm.get('user.email');
+
+    if (!emailField || !emailField.errors || !emailField.touched) return null;
+
+    if (this.signupForm.get('user.email').errors['required'])
+      return 'this field is required';
+    if (this.signupForm.get('user.email').errors['emailIsForbidden'])
+      return `"${this.signupForm.get('user.email').value}" is forbidden!`;
+
+    return null;
+  }
+
   ngOnInit(): void {
     this.signupForm = new FormGroup({
       user: new FormGroup({
