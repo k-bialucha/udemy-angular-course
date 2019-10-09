@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      projectName: new FormControl(''),
+      projectName: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
     });
 
     this.form.valueChanges.subscribe(value => {
