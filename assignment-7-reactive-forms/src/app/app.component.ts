@@ -21,4 +21,8 @@ export class AppComponent implements OnInit {
       console.log('form value update', value);
     });
   }
+
+  onSubmit() {
+    console.warn('onSubmit - form value is:', this.form.value);
+  }
 }
