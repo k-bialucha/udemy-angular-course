@@ -4,7 +4,7 @@ import { PipeTransform, Pipe } from '@angular/core';
   name: 'abbreviation',
 })
 export class AbbreviationPipe implements PipeTransform {
-  transform(value: string, ...args: any[]) {
+  transform(value: string, separator: string = '') {
     const words = value.split(' ');
 
     const firstLetters = words.map(word => {
@@ -12,6 +12,6 @@ export class AbbreviationPipe implements PipeTransform {
       return firstLetter.toUpperCase();
     });
 
-    return firstLetters.join('/');
+    return firstLetters.join(separator);
   }
 }
