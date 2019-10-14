@@ -55,10 +55,19 @@ export class AppComponent {
   }
 
   addServer() {
+    const firstWords = ['Dude', 'Some', 'Zyron'];
+    const firstWordIndex = Math.floor(firstWords.length * Math.random());
+
+    const types = ['small', 'medium', 'large'];
+    const typeIndex = Math.floor(firstWords.length * Math.random());
+
+    const statuses = ['stable', 'offline', 'critical'];
+    const statusIndex = (firstWordIndex + typeIndex) % statuses.length;
+
     this.servers.push({
-      name: 'Some Servver X33 Medium Pro',
-      status: 'stable',
-      instanceType: 'small',
+      name: `${firstWords[firstWordIndex]} Servver X33 Medium Pro`,
+      status: statuses[statusIndex],
+      instanceType: types[typeIndex],
       started: new Date(29, 7, 1994),
     });
     // updates the filtered list of servers in 'pure' pipe
