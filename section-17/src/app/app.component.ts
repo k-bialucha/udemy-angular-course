@@ -47,4 +47,23 @@ export class AppComponent {
       'list-group-item-danger': server.status === 'critical',
     };
   }
+
+  addServer() {
+    this.servers.push({
+      name: 'Some Servver X33 Medium Pro',
+      status: 'stable',
+      instanceType: 'small',
+      started: new Date(29, 7, 1994),
+    });
+    // updates the filtered list of servers in 'pure' pipe
+    // this.servers = [
+    //   ...this.servers,
+    //   {
+    //     name: 'Some Servver X33 Medium Pro',
+    //     status: 'stable',
+    //     instanceType: 'small',
+    //     started: new Date(29, 7, 1994),
+    //   },
+    // ];
+  }
 }
