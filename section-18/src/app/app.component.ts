@@ -18,6 +18,10 @@ const ENDPOINT_URL = `${API_URL}/${POSTS_PATH}`;
 export class AppComponent implements OnInit {
   loadedPosts: Post[] = [];
 
+  public get postsAvailable(): boolean {
+    return this.loadedPosts.length > 0;
+  }
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
@@ -58,6 +62,7 @@ export class AppComponent implements OnInit {
       )
       .subscribe(posts => {
         console.warn('GET posts response', posts[0]);
+        this.loadedPosts = posts;
       });
   }
 }
