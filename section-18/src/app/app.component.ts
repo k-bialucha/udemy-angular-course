@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-import { map } from 'rxjs/operators';
 
 import { Post } from './post.model';
 
-const API_URL = 'https://angular-udemy-course-backend.firebaseio.com';
-const POSTS_PATH = 'posts.json';
-
-const ENDPOINT_URL = `${API_URL}/${POSTS_PATH}`;
+import { PostsService } from './posts.service';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +11,7 @@ const ENDPOINT_URL = `${API_URL}/${POSTS_PATH}`;
 })
 export class AppComponent implements OnInit {
   loadedPosts: Post[] = [];
-
-  private _isFetching: boolean = false;
+  private _isFetching = false;
 
   public get isFetching(): boolean {
     return this._isFetching;
@@ -28,7 +21,7 @@ export class AppComponent implements OnInit {
     return this.loadedPosts.length > 0;
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private postsService: PostsService) {}
 
   ngOnInit() {
     this.fetchPosts();
@@ -36,11 +29,7 @@ export class AppComponent implements OnInit {
 
   onCreatePost(postData: Post) {
     // Send Http request
-    this.http
-      .post<{ name: string }>(ENDPOINT_URL, postData)
-      .subscribe(responseData => {
-        console.log(responseData);
-      });
+    this.postsService.createPost(postData.title, postData.content);
   }
 
   onFetchPosts() {
@@ -55,26 +44,11 @@ export class AppComponent implements OnInit {
   private fetchPosts() {
     this._isFetching = true;
 
-    this.http
-      .get<{ [key: string]: Post }>(ENDPOINT_URL)
-      .pipe(
-        map(responseData => {
-          const keys = Object.keys(responseData);
-
-          const objectList = keys.map((key: string) => ({
-            id: key,
-            ...responseData[key],
-          }));
-          return objectList;
-        })
-      )
-      .subscribe(posts => {
-        console.warn('GET posts response', posts[0]);
-        this.loadedPosts = posts;
-
-        setTimeout(() => {
-          this._isFetching = false;
-        }, 900);
-      });
+    this.postsService.fetchPosts().subscribe(posts => {
+      this.loadedPosts = posts;
+      setTimeout(() => {
+        this._isFetching = false;
+      }, 900);
+    });
   }
 }
