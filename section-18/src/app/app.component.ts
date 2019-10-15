@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { map } from 'rxjs/operators';
 
+import { Post } from './post.model';
+
 const API_URL = 'https://angular-udemy-course-backend.firebaseio.com';
 const POSTS_PATH = 'posts.json';
 
@@ -14,7 +16,7 @@ const ENDPOINT_URL = `${API_URL}/${POSTS_PATH}`;
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  loadedPosts = [];
+  loadedPosts: Post[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -22,11 +24,13 @@ export class AppComponent implements OnInit {
     this.fetchPosts();
   }
 
-  onCreatePost(postData: { title: string; content: string }) {
+  onCreatePost(postData: Post) {
     // Send Http request
-    this.http.post(ENDPOINT_URL, postData).subscribe(responseData => {
-      console.log(responseData);
-    });
+    this.http
+      .post<{ name: string }>(ENDPOINT_URL, postData)
+      .subscribe(responseData => {
+        console.log(responseData);
+      });
   }
 
   onFetchPosts() {
@@ -40,9 +44,9 @@ export class AppComponent implements OnInit {
 
   private fetchPosts() {
     this.http
-      .get(ENDPOINT_URL)
+      .get<{ [key: string]: Post }>(ENDPOINT_URL)
       .pipe(
-        map((responseData: Object) => {
+        map(responseData => {
           const keys = Object.keys(responseData);
 
           const objectList = keys.map((key: string) => ({
@@ -52,8 +56,8 @@ export class AppComponent implements OnInit {
           return objectList;
         })
       )
-      .subscribe(response => {
-        console.warn('GET posts response', response);
+      .subscribe(posts => {
+        console.warn('GET posts response', posts[0]);
       });
   }
 }
