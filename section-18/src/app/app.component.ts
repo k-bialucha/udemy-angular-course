@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { map } from 'rxjs/operators';
+
 const API_URL = 'https://angular-udemy-course-backend.firebaseio.com';
 const POSTS_PATH = 'posts.json';
 
@@ -37,8 +39,21 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
-    this.http.get(ENDPOINT_URL).subscribe(response => {
-      console.warn('GET posts response', response);
-    });
+    this.http
+      .get(ENDPOINT_URL)
+      .pipe(
+        map((responseData: Object) => {
+          const keys = Object.keys(responseData);
+
+          const objectList = keys.map((key: string) => ({
+            id: key,
+            ...responseData[key],
+          }));
+          return objectList;
+        })
+      )
+      .subscribe(response => {
+        console.warn('GET posts response', response);
+      });
   }
 }
