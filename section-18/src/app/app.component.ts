@@ -18,6 +18,12 @@ const ENDPOINT_URL = `${API_URL}/${POSTS_PATH}`;
 export class AppComponent implements OnInit {
   loadedPosts: Post[] = [];
 
+  private _isFetching: boolean = false;
+
+  public get isFetching(): boolean {
+    return this._isFetching;
+  }
+
   public get postsAvailable(): boolean {
     return this.loadedPosts.length > 0;
   }
@@ -47,6 +53,8 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
+    this._isFetching = true;
+
     this.http
       .get<{ [key: string]: Post }>(ENDPOINT_URL)
       .pipe(
@@ -63,6 +71,10 @@ export class AppComponent implements OnInit {
       .subscribe(posts => {
         console.warn('GET posts response', posts[0]);
         this.loadedPosts = posts;
+
+        setTimeout(() => {
+          this._isFetching = false;
+        }, 900);
       });
   }
 }
