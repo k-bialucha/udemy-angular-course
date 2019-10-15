@@ -1,5 +1,7 @@
 export class Post {
-  id?: string;
-  title: string;
-  content: string;
+  constructor(
+    public title: string,
+    public content: string,
+    public id?: string
+  ) {}
 }
