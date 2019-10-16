@@ -41,6 +41,8 @@ export class PostsService {
   fetchPosts(): Observable<Post[]> {
     return this.httpClient.get<{ [key: string]: Post }>(ENDPOINT_URL).pipe(
       map(responseData => {
+        if (!responseData) return [];
+
         const keys = Object.keys(responseData);
 
         const objectList = keys.map((key: string) => ({
@@ -50,5 +52,9 @@ export class PostsService {
         return objectList;
       })
     );
+  }
+
+  clearPosts(): Observable<void> {
+    return this.httpClient.delete<void>(ENDPOINT_URL);
   }
 }
