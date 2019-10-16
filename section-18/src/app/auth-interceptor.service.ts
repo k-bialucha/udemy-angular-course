@@ -7,24 +7,30 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
 export class AuthInterceptorService implements HttpInterceptor {
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     console.log('[interceptor] request about to be intercepted', req.method);
+    let request = req.clone({
+      headers: req.headers.append('authorization', 'hello'),
+    });
 
     if (req.method === 'POST') {
       const lowerCaseTitle = (<string>req.body.title).toLowerCase();
       const capitalizedTitle =
         lowerCaseTitle.charAt(0).toUpperCase() + lowerCaseTitle.slice(1) + '.';
-      req.body.title = capitalizedTitle;
+
+      request = request.clone({
+        body: {
+          ...req.body,
+          title: capitalizedTitle,
+        },
+      });
     }
 
-    return next.handle(req);
+    return next.handle(request);
   }
   constructor() {}
 }
