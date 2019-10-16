@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
+import { Observable, Subject, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 import { Post } from './post.model';
 
@@ -61,6 +62,11 @@ export class PostsService {
           ...responseData[key],
         }));
         return objectList;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.warn('ERROR - caught', error);
+        console.log('will re-throw error');
+        return throwError(error);
       })
     );
   }
