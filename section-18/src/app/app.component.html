@@ -36,6 +36,11 @@
   <div *ngIf="creatingError" class="alert alert-danger">
     <h3 style="margin-top: 5px;">Creating error</h3>
     <p>{{ creatingError }}</p>
+    <p>
+      <button class="btn btn-danger" (click)="creatingError = null">
+        Fine
+      </button>
+    </p>
   </div>
   <hr />
   <div class="row">
@@ -59,6 +64,11 @@
       <div *ngIf="fetchingError && !isFetching" class="alert alert-danger">
         <h3 style="margin-top: 5px;">Fetching error</h3>
         <p>{{ fetchingError }}</p>
+        <p>
+          <button class="btn btn-danger" (click)="fetchingError = null">
+            Fine
+          </button>
+        </p>
       </div>
       <p *ngIf="!postsAvailable && !isFetching">No posts available!</p>
       <ul *ngIf="postsAvailable && !isFetching" class="list-group">
