@@ -74,12 +74,18 @@ export class PostsService {
       .append('someKey', '-5');
 
     return this.httpClient
-      .get<{ [key: string]: Post }>(ENDPOINT_URL, {
+      .get(ENDPOINT_URL, {
         headers: new HttpHeaders({ 'some-header': 'hello' }),
         params: httpParams,
+        // default:
+        // responseType: 'json',
+        responseType: 'text',
       })
       .pipe(
-        map(responseData => {
+        map(responseText => {
+          // handle own parsing from text to POJO
+          const responseData = JSON.parse(responseText);
+
           if (!responseData) return [];
 
           const keys = Object.keys(responseData);
