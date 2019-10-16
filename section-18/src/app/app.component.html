@@ -51,7 +51,11 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-      <p *ngIf="isFetching">Loading posts...</p>
+      <p *ngIf="isFetching && !fetchingError">Loading posts...</p>
+      <div *ngIf="fetchingError && !isFetching" class="alert alert-danger">
+        <h3 style="margin-top: 5px;">Fetching error</h3>
+        <p>{{ fetchingError }}</p>
+      </div>
       <p *ngIf="!postsAvailable && !isFetching">No posts available!</p>
       <ul *ngIf="postsAvailable && !isFetching" class="list-group">
         <li *ngFor="let post of loadedPosts" class="list-group-item">

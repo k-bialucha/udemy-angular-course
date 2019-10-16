@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from './post.model';
 
 import { PostsService } from './posts.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { PostsService } from './posts.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  fetchingError: string = null;
   loadedPosts: Post[] = [];
   private _isFetching = false;
 
@@ -46,12 +48,27 @@ export class AppComponent implements OnInit {
 
   private fetchPosts() {
     this._isFetching = true;
+    this.fetchingError = null;
 
-    this.postsService.fetchPosts().subscribe(posts => {
-      this.loadedPosts = posts;
-      setTimeout(() => {
+    this.postsService.fetchPosts().subscribe(
+      posts => {
+        this.loadedPosts = posts;
+        setTimeout(() => {
+          this._isFetching = false;
+        }, 900);
+      },
+      (error: HttpErrorResponse) => {
+        const { error: apiError, status, statusText, url } = error;
+
+        const message = `
+          ${status} ${statusText} 
+          | API responded: "${apiError.error}" 
+          | URL: ${url}"
+          `;
+
         this._isFetching = false;
-      }, 900);
-    });
+        this.fetchingError = message;
+      }
+    );
   }
 }
