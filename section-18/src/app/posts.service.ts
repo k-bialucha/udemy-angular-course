@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http';
 
 import { Observable, Subject, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -51,24 +56,33 @@ export class PostsService {
   }
 
   fetchPosts(): Observable<Post[]> {
-    return this.httpClient.get<{ [key: string]: Post }>(ENDPOINT_URL).pipe(
-      map(responseData => {
-        if (!responseData) return [];
+    const httpParams = new HttpParams()
+      .append('print', 'pretty')
+      .append('someKey', '-5');
 
-        const keys = Object.keys(responseData);
-
-        const objectList = keys.map((key: string) => ({
-          id: key,
-          ...responseData[key],
-        }));
-        return objectList;
-      }),
-      catchError((error: HttpErrorResponse) => {
-        console.warn('ERROR - caught', error);
-        console.log('will re-throw error');
-        return throwError(error);
+    return this.httpClient
+      .get<{ [key: string]: Post }>(ENDPOINT_URL, {
+        headers: new HttpHeaders({ 'some-header': 'hello' }),
+        params: httpParams,
       })
-    );
+      .pipe(
+        map(responseData => {
+          if (!responseData) return [];
+
+          const keys = Object.keys(responseData);
+
+          const objectList = keys.map((key: string) => ({
+            id: key,
+            ...responseData[key],
+          }));
+          return objectList;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.warn('ERROR - caught', error);
+          console.log('will re-throw error');
+          return throwError(error);
+        })
+      );
   }
 
   clearPosts(): Observable<void> {
